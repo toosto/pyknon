@@ -13,8 +13,8 @@ _MODE_FUNC = {
     'absolute': sequences.get_absolute_seq,
     'relative': sequences.get_relative_seq,
     'chords': sequences.get_chords_seq,
-    'octave': sequences.get_octave_seq,
-    'harmonised': sequences.get_harmonised_seq
+    'octave': sequences.get_octave_seq,  # Debugging
+    'harmonised': sequences.get_harmonised_seq  # Debugging
 }
 
 def main(mode, key, tempo, len_each, total):
@@ -44,8 +44,8 @@ if __name__ == '__main__':
     if not (len(sys.argv) == 6 and \
             sys.argv[1] in _MODE_FUNC.keys() and \
             re.match(r'[A-G](#|b)?(maj|min)$', sys.argv[2]) and \
-            all(_.isnumeric() for _ in sys.argv[3:])) and \
-            int(sys.argv[4]) in {1, 2, 4}:
+            all(_.isnumeric() for _ in sys.argv[3:]) and \
+            int(sys.argv[4]) in {1, 2, 4}):
 
         raise SyntaxError('Invalid command line!')
     raise Exception('Stop')

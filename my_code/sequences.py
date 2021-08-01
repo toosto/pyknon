@@ -41,7 +41,7 @@ def get_relative_seq(key, len_note, total):
     return note_seq
 
 
-def get_chord_seq(key, len_chord, total):
+def get_chords_seq(key, len_chord, total):
 
     chords = helpers.get_all_chords(key)
     logging.debug('All the chords in the key are %s.', chords)

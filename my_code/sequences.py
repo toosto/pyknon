@@ -1,5 +1,6 @@
 import math
 import random
+import logging
 
 from pyknon.music import Note, NoteSeq
 
@@ -9,6 +10,7 @@ import helpers, constants
 def get_absolute_seq(key, len_note, total):
 
     all_notes = helpers.get_all_notes(key)
+    logging.debug('All the notes in the key are %s.', all_notes)
     seq_notes = random.choices(all_notes, k=total)
 
     duration = int(4/len_note)
@@ -25,6 +27,7 @@ def get_absolute_seq(key, len_note, total):
 def get_relative_seq(key, len_note, total):
 
     all_notes = helpers.get_all_notes(key)
+    logging.debug('All the notes in the key are %s.', all_notes)
     seq_notes = random.choices(all_notes, k=total)
 
     duration = int(4/len_note)
@@ -41,6 +44,7 @@ def get_relative_seq(key, len_note, total):
 def get_chord_seq(key, len_chord, total):
 
     chords = helpers.get_all_chords(key)
+    logging.debug('All the chords in the key are %s.', chords)
     seq_chords = random.choices(chords, k=total)
 
     duration = int(4/len_note)
@@ -58,6 +62,7 @@ def get_chord_seq(key, len_chord, total):
 def get_octave_seq(key, len_note):
 
     all_notes = helpers.get_all_notes(key)
+    logging.debug('All the notes in the key are %s.', all_notes)
 
     duration = int(4/len_note)
     dev_5  = 5 - random.choice((3,4,5))
@@ -73,7 +78,7 @@ def get_octave_seq(key, len_note):
 def get_harmonised_seq(key, len_chord):
 
     chords = helpers.get_all_chords(key)
-
+    logging.debug('All the chords in the key are %s.', chords)
     duration = int(4/len_note)
 
     Note_Seq = []

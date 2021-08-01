@@ -19,22 +19,24 @@ _MODE_FUNC = {
 
 def main(mode, key, tempo, len_each, total):
 
-    f_name = f"Track_{mode}_{key}"
+    f_path = f"/home/tushar/shared_folder/Midi_tracks/Track_{mode}_{key}_{tempo}_{len_each}_{total}"
 
     # Initialize logging.
-    logging.basicConfig(level=logging.INFO, filename=f_name+'.log')
+    # logging.basicConfig(level=logging.INFO, filename=f_path+'.log')
+    logging.basicConfig(level=logging.DEBUG, filename=f_path+'.log')
 
     # 60 bpm single track Midi
     midi = Midi(number_tracks=1, tempo=tempo, instrument=40, channel=0)
 
     full_seq = _MODE_FUNC[mode](key, len_each, total)
+    logging.debug('Full sequence created is:\n%s', full_seq)
 
     if mode in ('chords', 'harmonised'):
         midi.seq_chords(full_seq, track=0)
     else:
         midi.seq_notes(full_seq, track=0)
 
-    midi.write(filename=f_name+'.mid')
+    midi.write(filename=f_path+'.mid')
 
 
 if __name__ == '__main__':

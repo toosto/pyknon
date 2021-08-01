@@ -1,5 +1,6 @@
-from pychord import Chord
-from pychord import utils
+import logging
+
+from pychord import utils, Chord
 
 
 def get_tonic_type(key):
@@ -8,6 +9,7 @@ def get_tonic_type(key):
 def get_all_notes(key):
 
     tonic, type_key = get_tonic_type(key)
+    logging.debug('Tonic: %s, type of key: %s', tonic, type_key)
 
     intervals = {
         'maj': (0, 2, 4, 5, 7, 9, 11),
@@ -22,6 +24,7 @@ def get_all_notes(key):
 def get_all_chords(key):
 
     tonic, type_key = get_tonic_type(key)
+    logging.debug('Tonic: %s, type of key: %s', tonic, type_key)
 
     qualities = {
         'maj': ('maj', 'min', 'min', 'maj', 'maj', 'min', 'dim'),

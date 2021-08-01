@@ -4,11 +4,12 @@ from pyknon.music import NoteSeq
 # Notes on two tracks using the defaults
 
 notes1 = NoteSeq("C4.'' B8' A4 D")
-notes2 = NoteSeq("E4 F G4. A8")
+# notes2 = NoteSeq("E4 F G4. A8")
 
-m = Midi(2, tempo=100, instrument=[12, 14])
+# m = Midi(2, tempo=100, instrument=[12, 14])
+m = Midi(1, tempo=100, instrument=12)
 m.seq_notes(notes1, track=0)
-m.seq_notes(notes2, track=1)
+# m.seq_notes(notes2, track=1)
 m.write("tracks.mid")
 
 # Chords on two tracks using the defaults

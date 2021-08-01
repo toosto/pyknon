@@ -1,32 +1,33 @@
 from pychord import Chord
-from pyknon.music import NoteSeq
-
-import constants
+from pychord import utils
 
 
-def get_all_chords(root=None):
+def get_tonic_type(key):
+    return key[:-3], key[-3:]
 
-    all_chords = [
-        Chord('Em'),
-        Chord('F#dim'),
-        Chord('G'),
-        Chord('Am'),
-        Chord('Bm'),
-        Chord('C'),
-        Chord('D')
-    ]
+def get_all_notes(key):
 
-    return all_chords
+    tonic, type_key = get_tonic_type(key)
+
+    intervals = {
+        'maj': (0, 2, 4, 5, 7, 9, 11),
+        'min': (0, 2, 3, 5, 7, 8, 10)
+    }
+
+    all_notes = tuple(utils.val_to_note(_, tonic) for _ in intervals[type_key])
+
+    return all_notes
 
 
-def chords_to_noteseq(chords):
+def get_all_chords(key):
 
-    note_seqs = []
-    for chord in chords:
-        root_pitch = constants.root_octaves[chord.root]
-        components_with_pitch = chord.components_with_pitch(root_pitch=root_pitch)
-        note_seq = NoteSeq(' '.join(components_with_pitch))
-        note_seqs.append(note_seq)
+    tonic, type_key = get_tonic_type(key)
 
-    return note_seqs
+    qualities = {
+        'maj': ('maj', 'min', 'min', 'maj', 'maj', 'min', 'dim'),
+        'min': ('min', 'dim', 'maj', 'min', 'min', 'maj', 'maj')
+    }
 
+    chords = tuple(Chord.from_note_index(note=_+1, scale=key, quailities[type_key][_]) for _ in range(0, 7))
+
+    return chords

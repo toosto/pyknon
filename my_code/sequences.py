@@ -3,6 +3,7 @@ import random
 import logging
 
 from pyknon.music import Note, NoteSeq
+from pychord import utils
 
 import helpers, constants
 
@@ -65,12 +66,18 @@ def get_octave_seq(key, len_note, *args):
     logging.debug('All the notes in the key are %s.', all_notes)
 
     duration = int(4/len_note)
-    dev_5  = 5 - random.choice((3,4,5))
-    octave = "'" if not dev_5 else "," * dev_5
+    dev_5 = 5 - random.choice((2, 3, 4))
 
     note_seq = NoteSeq()
+    done_once = False
     for note in all_notes:
-        note_seq.append(Note(f'{note}{duration}{octave}'))
+        if utils.note_to_val(note) >= 0 and not done_once:
+            dev_5 -= 1
+            done_once = True
+        octave = "'" * (abs(dev_5) + 1) if dev_5 <= 0 else "," * dev_5
+        note_str = f'{note}{duration}{octave}'
+        logging.info('Constructing Note with %s.', note_str)
+        note_seq.append(Note(note_str))
 
     return note_seq
 

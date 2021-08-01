@@ -23,7 +23,7 @@ def main(mode, key, tempo, len_each, total):
 
     # Initialize logging.
     # logging.basicConfig(level=logging.INFO, filename=f_path+'.log')
-    logging.basicConfig(level=logging.DEBUG, filename=f_path+'.log')
+    logging.basicConfig(level=logging.DEBUG, filename=f_path+'.log', filemode='w')
 
     # 60 bpm single track Midi
     midi = Midi(number_tracks=1, tempo=tempo, instrument=40, channel=0)

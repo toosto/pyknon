@@ -47,19 +47,19 @@ def get_chords_seq(key, len_chord, total):
     logging.debug('All the chords in the key are %s.', chords)
     seq_chords = random.choices(chords, k=total)
 
-    duration = int(4/len_note)
+    duration = int(4/len_chord)
 
     Note_Seq = []
     for chord in seq_chords:
         dev_5  = 5 - constants.root_octaves[chord.root]
         octave = "'" if not dev_5 else "," * dev_5
-        note_seq = NoteSeq(' '.join([f'{chord.root}{duration}{octave}', *chord.components[1:]]))
+        note_seq = NoteSeq(' '.join([f'{chord.root}{duration}{octave}', *chord.components()[1:]]))
         Note_Seq.append(note_seq)
 
     return Note_Seq
 
 
-def get_octave_seq(key, len_note):
+def get_octave_seq(key, len_note, *args):
 
     all_notes = helpers.get_all_notes(key)
     logging.debug('All the notes in the key are %s.', all_notes)
@@ -75,17 +75,17 @@ def get_octave_seq(key, len_note):
     return note_seq
 
 
-def get_harmonised_seq(key, len_chord):
+def get_harmonised_seq(key, len_chord, *args):
 
     chords = helpers.get_all_chords(key)
     logging.debug('All the chords in the key are %s.', chords)
-    duration = int(4/len_note)
+    duration = int(4/len_chord)
 
     Note_Seq = []
     for chord in chords:
         dev_5  = 5 - constants.root_octaves[chord.root]
         octave = "'" if not dev_5 else "," * dev_5
-        note_seq = NoteSeq(' '.join([f'{chord.root}{duration}{octave}', *chord.components[1:]]))
+        note_seq = NoteSeq(' '.join([f'{chord.root}{duration}{octave}', *chord.components()[1:]]))
         Note_Seq.append(note_seq)
 
     return Note_Seq

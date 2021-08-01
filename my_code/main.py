@@ -48,6 +48,11 @@ if __name__ == '__main__':
             int(sys.argv[4]) in {1, 2, 4}):
 
         raise SyntaxError('Invalid command line!')
-    raise Exception('Stop')
 
-    main(*argv[1:])
+    mode = sys.argv[1]
+    key = sys.argv[2]
+    tempo = int(sys.argv[3])
+    len_each = int(sys.argv[4])
+    total = int(sys.argv[5])
+
+    main(mode, key, tempo, len_each, total)

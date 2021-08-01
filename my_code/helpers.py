@@ -28,6 +28,6 @@ def get_all_chords(key):
         'min': ('min', 'dim', 'maj', 'min', 'min', 'maj', 'maj')
     }
 
-    chords = tuple(Chord.from_note_index(note=_+1, scale=key, quailities[type_key][_]) for _ in range(0, 7))
+    chords = tuple(Chord.from_note_index(note=_+1, quality=quailities[type_key][_], scale=key) for _ in range(0, 7))
 
     return chords

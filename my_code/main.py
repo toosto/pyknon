@@ -12,10 +12,12 @@ import sequences
 _MODE_FUNC = {
     'absolute': sequences.get_absolute_seq,
     'relative': sequences.get_relative_seq,
-    'chords': sequences.get_chords_seq
+    'chords': sequences.get_chords_seq,
+    'octave': sequences.get_octave_seq,
+    'harmonised': sequences.get_harmonised_seq
 }
 
-def main(mode, key, len_each, len_track):
+def main(mode, key, tempo, len_each, total):
 
     f_name = f"Track_{mode}_{key}"
 
@@ -23,11 +25,11 @@ def main(mode, key, len_each, len_track):
     logging.basicConfig(level=logging.INFO, filename=f_name+'.log')
 
     # 60 bpm single track Midi
-    midi = Midi(number_tracks=1, tempo=60, instrument=40, channel=0)
+    midi = Midi(number_tracks=1, tempo=tempo, instrument=40, channel=0)
 
-    full_seq = _MODE_FUNC[mode](key=key)
+    full_seq = _MODE_FUNC[mode](key, len_each, total)
 
-    if mode == 'chords':
+    if mode in ('chords', 'harmonised'):
         midi.seq_chords(full_seq, track=0)
     else:
         midi.seq_notes(full_seq, track=0)
@@ -37,10 +39,11 @@ def main(mode, key, len_each, len_track):
 
 if __name__ == '__main__':
 
-    if not (len(sys.argv) == 5 and \
+    if not (len(sys.argv) == 6 and \
             sys.argv[1] in _MODE_FUNC.keys() and \
             re.match(r'[A-G](#|b)?(maj|min)$', sys.argv[2]) and \
-            all(_.isnumeric() for _ in sys.argv[3:])):
+            all(_.isnumeric() for _ in sys.argv[3:])) and \
+            int(sys.argv[4]) in {1, 2, 4}:
 
         raise SyntaxError('Invalid command line!')
     raise Exception('Stop')

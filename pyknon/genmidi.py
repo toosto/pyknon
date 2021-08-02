@@ -38,8 +38,14 @@ class Midi(object):
             if isinstance(item, NoteSeq):
                 volume = item[0].volume
                 dur = item[0].midi_dur
+
+                prev_number = None
                 for note in item:
-                    self.midi_data.addNote(track, _channel, note.midi_number, time, dur, volume)
+                    midi_number = note.midi_number
+                    if prev_number is not None and midi_number < prev_number:
+                        midi_number += 12
+                    self.midi_data.addNote(track, _channel, midi_number, time, dur, volume)
+                    prev_number = midi_number
                 time += dur
             elif isinstance(item, Rest):
                 time += item.midi_dur

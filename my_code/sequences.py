@@ -62,22 +62,24 @@ def get_chords_seq(key, len_chord, total):
 
 def get_octave_seq(key, len_note, *args):
 
-    all_notes = helpers.get_all_notes(key)
+    all_notes = list(helpers.get_all_notes(key))
+    all_notes.append(all_notes[0])  # Completing the octave
     logging.debug('All the notes in the key are %s.', all_notes)
 
     duration = int(4/len_note)
-    dev_5 = 5 - random.choice((2, 3, 4))
+    dev_5 = 5 - random.choice((3, 4, 5))
 
     note_seq = NoteSeq()
-    done_once = False
+    prev_value = None
     for note in all_notes:
-        if utils.note_to_val(note) >= 0 and not done_once:
+        note_val = utils.note_to_val(note)
+        if prev_value is not None and note_val < prev_value:
             dev_5 -= 1
-            done_once = True
         octave = "'" * (abs(dev_5) + 1) if dev_5 <= 0 else "," * dev_5
         note_str = f'{note}{duration}{octave}'
         logging.info('Constructing Note with %s.', note_str)
         note_seq.append(Note(note_str))
+        prev_value = note_val
 
     return note_seq
 

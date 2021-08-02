@@ -81,12 +81,13 @@ def get_chords_seq(key, len_chord, total):
     chords = helpers.get_all_chords(key)
     logging.debug('All the chords in the key are %s.', chords)
     seq_chords = random.choices(chords, k=total)
+    higher_octave = random.choice((True, False))
 
     duration = int(4/len_chord)
 
     Note_Seq = []
     for chord in seq_chords:
-        dev_5  = 5 - constants.root_octaves[chord.root]
+        dev_5  = 5 - constants.root_octaves[chord.root] - int(higher_octave)
         octave = "'" * (abs(dev_5) + 1) if dev_5 <= 0 else "," * dev_5
         note_seq = NoteSeq(' '.join([f'{chord.root}{duration}{octave}', *chord.components()[1:]]))
         Note_Seq.append(note_seq)
@@ -125,7 +126,7 @@ def get_harmonised_seq(key, len_chord, *args):
     logging.debug('All the chords in the key are %s.', chords)
 
     duration = int(4/len_chord)
-    dev_5 = 5 - random.choice((3, 4))
+    dev_5 = 1
 
     Note_Seq = []
     prev_value = None

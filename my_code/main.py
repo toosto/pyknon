@@ -11,7 +11,9 @@ import sequences
 
 _MODE_FUNC = {
     'absolute': sequences.get_absolute_seq,
+    'absolute_p': sequences.get_absolute_p_seq,
     'relative': sequences.get_relative_seq,
+    'relative_p': sequences.get_relative_p_seq,
     'chords': sequences.get_chords_seq,
     'octave': sequences.get_octave_seq,  # Debugging
     'harmonised': sequences.get_harmonised_seq  # Debugging

@@ -25,13 +25,16 @@ def main(mode, key, tempo, len_each, total):
 
     # Initialize logging.
     # logging.basicConfig(level=logging.INFO, filename=f_path+'.log')
-    logging.basicConfig(level=logging.DEBUG, filename=f_path+'.log', filemode='w')
+    logging.basicConfig(level=logging.DEBUG, filename=f_path+'.log', filemode='w', format='%(message)s')
 
     # 60 bpm single track Midi
-    midi = Midi(number_tracks=1, tempo=tempo, instrument=40, channel=0)
+    midi = Midi(number_tracks=1, tempo=tempo, instrument=25, channel=0)
 
     full_seq = _MODE_FUNC[mode](key, len_each, total)
-    logging.debug('Full sequence created is:\n%s', full_seq)
+
+    len_ = len(full_seq)
+    for index, item in enumerate(full_seq):
+        logging.debug(f'{(100/len_) * (index + 1)}: {item}')
 
     if mode in ('chords', 'harmonised'):
         midi.seq_chords(full_seq, track=0)

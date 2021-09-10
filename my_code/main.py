@@ -14,6 +14,7 @@ _MODE_FUNC = {
     'absolute_p': sequences.get_absolute_p_seq,
     'relative': sequences.get_relative_seq,
     'relative_p': sequences.get_relative_p_seq,
+    'interval': sequences.get_interval_seq,
     'chords': sequences.get_chords_seq,
     'octave': sequences.get_octave_seq,  # Debugging
     'harmonised': sequences.get_harmonised_seq  # Debugging
@@ -28,7 +29,7 @@ def main(mode, key, tempo, len_each, total):
     logging.basicConfig(level=logging.DEBUG, filename=f_path+'.log', filemode='w', format='%(message)s')
 
     # 60 bpm single track Midi
-    midi = Midi(number_tracks=1, tempo=tempo, instrument=25, channel=0)
+    midi = Midi(number_tracks=1, tempo=tempo, instrument=30, channel=0)
 
     full_seq = _MODE_FUNC[mode](key, len_each, total)
 

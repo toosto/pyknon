@@ -1,6 +1,6 @@
-#!python
+#!/usr/bin/env python3
 import sys
-sys.path.append('/home/tushar/music_programming/repos/pyknon/')
+sys.path.append('/home/parallels/repos/pyknon')
 
 import logging
 import re
@@ -22,14 +22,14 @@ _MODE_FUNC = {
 
 def main(mode, key, tempo, len_each, total):
 
-    f_path = f"/home/tushar/shared_folder/Midi_tracks/Track_{mode}_{key}_{tempo}_{len_each}_{total}"
+    f_path = f"/home/parallels/shared_folder/Midi_tracks/Track_{mode}_{key}_{tempo}_{len_each}_{total}"
 
     # Initialize logging.
     # logging.basicConfig(level=logging.INFO, filename=f_path+'.log')
     logging.basicConfig(level=logging.DEBUG, filename=f_path+'.log', filemode='w', format='%(message)s')
 
     # 60 bpm single track Midi
-    midi = Midi(number_tracks=1, tempo=tempo, instrument=30, channel=0)
+    midi = Midi(number_tracks=1, tempo=tempo, instrument=26, channel=0)
 
     full_seq = _MODE_FUNC[mode](key, len_each, total)
 
@@ -54,6 +54,8 @@ if __name__ == '__main__':
             int(sys.argv[4]) in {1, 2, 4}):
 
         raise SyntaxError('Invalid command line!')
+        # E.g. python3 main.py relative_p Amin 60 4 120
+        # Am pentatonic single octave, whole notes at 60 BPM
 
     mode = sys.argv[1]
     key = sys.argv[2]

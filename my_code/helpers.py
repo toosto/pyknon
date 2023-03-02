@@ -15,8 +15,8 @@ def get_all_notes(key, pentatonic=False, chromatic=False):
     tonic_c_offset = utils.note_to_val(tonic)
 
     intervals = {
-        'maj': (0, 2, 4, 5, 7, 9, 11) if not pentatonic else (0, 2, 4, 7, 9),
-        'min': (0, 2, 3, 5, 7, 8, 10) if not pentatonic else (0, 3, 5, 7, 10),
+        'maj': (0, 2, 4, 5, 7, 9, 11, 12) if not pentatonic else (0, 2, 4, 7, 9, 12),
+        'min': (0, 2, 3, 5, 7, 8, 10, 12) if not pentatonic else (0, 3, 5, 7, 10, 12),
         'chromatic': range(12)
     }
 
@@ -31,8 +31,8 @@ def get_all_chords(key):
     logging.debug('Tonic: %s, type of key: %s', tonic, type_key)
 
     qualities = {
-        'maj': ('maj', 'min', 'min', 'maj', 'maj', 'min', 'dim'),
-        'min': ('min', 'dim', 'maj', 'min', 'min', 'maj', 'maj')
+        'maj': ('maj', 'min', 'min', 'maj', 'maj', 'min', 'dim', 'maj'),
+        'min': ('min', 'dim', 'maj', 'min', 'min', 'maj', 'maj', 'min')
     }
 
     chords = tuple(Chord.from_note_index(note=_+1, quality=qualities[type_key][_], scale=key) for _ in range(0, 7))

@@ -18,7 +18,7 @@ def get_absolute_seq(key, len_note, total):
 
     note_seq = NoteSeq()
     for note in seq_notes:
-        dev_5  = 5 - random.choice((4,5))  # Can do 4,5,6 to get a higher octave.
+        dev_5  = 5 - random.choice((4, 5))
         octave = "'" * (abs(dev_5) + 1) if dev_5 <= 0 else "," * dev_5
         note_seq.append(Note(f'{note}{duration}{octave}'))
 
@@ -32,7 +32,7 @@ def get_relative_seq(key, len_note, total):
     seq_notes = random.choices(all_notes, k=total)
 
     duration = int(4/len_note)
-    dev_5  = 5 - random.choice((4,5))  # Can do 4,5,6 to get a higher octave.
+    dev_5  = 5 - random.choice((4, 5))  # Can do 4,5,6 to get a higher octave.
     octave = "'" * (abs(dev_5) + 1) if dev_5 <= 0 else "," * dev_5
 
     note_seq = NoteSeq()
@@ -52,7 +52,7 @@ def get_absolute_p_seq(key, len_note, total):
 
     note_seq = NoteSeq()
     for note in seq_notes:
-        dev_5  = 5 - random.choice((4,5,6))
+        dev_5  = 5 - random.choice((4, 5))
         octave = "'" * (abs(dev_5) + 1) if dev_5 <= 0 else "," * dev_5
         note_seq.append(Note(f'{note}{duration}{octave}'))
 
@@ -66,7 +66,7 @@ def get_relative_p_seq(key, len_note, total):
     seq_notes = random.choices(all_notes, k=total)
 
     duration = int(4/len_note)
-    dev_5  = 5 - random.choice((4,5,6))
+    dev_5  = 5 - random.choice((4, 5))
     octave = "'" * (abs(dev_5) + 1) if dev_5 <= 0 else "," * dev_5
 
     note_seq = NoteSeq()
@@ -84,7 +84,7 @@ def get_interval_seq(key, len_note, total):
     seq_notes = random.choices(all_notes, k=total)
 
     duration = int(4/len_note)
-    dev_5  = 5 - random.choice((4,5))  # Can do 4,5,6 to get a higher octave.
+    dev_5  = 5 - random.choice((4, 5))  # Can do 4,5,6 to get a higher octave.
     octave = "'" * (abs(dev_5) + 1) if dev_5 <= 0 else "," * dev_5
 
     note_seq = NoteSeq()

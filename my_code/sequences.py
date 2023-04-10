@@ -81,7 +81,7 @@ def get_interval_seq(key, len_note, total):
     all_notes = helpers.get_all_notes(key, chromatic=True)
     logging.debug('all the notes in the key are %s.', all_notes)
     root_note = all_notes[0]
-    seq_notes = random.choices(all_notes, k=total)
+    seq_notes = [note for note in random.choices(all_notes, k=total) if note != root_note]
 
     duration = int(4/len_note)
     dev_5  = 5 - random.choice((4, 5))  # Can do 4,5,6 to get a higher octave.

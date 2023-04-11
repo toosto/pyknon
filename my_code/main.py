@@ -22,7 +22,7 @@ _MODE_FUNC = {
 
 def main(mode, key, tempo, len_each, total):
 
-    f_path = f"/home/parallels/shared_folder/Midi_tracks/Track_{mode}_{key}_{tempo}_{len_each}_{total}"
+    f_path = f"/home/parallels/shared_folder/midi_tracks/Track_{mode}_{key}_{tempo}_{len_each}_{total}"
 
     # Initialize logging.
     # logging.basicConfig(level=logging.INFO, filename=f_path+'.log')

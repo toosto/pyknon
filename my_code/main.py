@@ -55,7 +55,7 @@ if __name__ == '__main__':
 
         raise SyntaxError('Invalid command line!')
         # E.g. python3 main.py relative_p Amin 60 4 120
-        # Am pentatonic single octave, whole notes at 60 BPM
+        # Am pentatonic single octave, 60 whole notes at 120 BPM
 
     mode = sys.argv[1]
     key = sys.argv[2]

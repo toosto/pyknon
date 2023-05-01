@@ -16,7 +16,7 @@ def get_all_notes(key, pentatonic=False, chromatic=False):
 
     intervals = {
         'maj': (0, 2, 4, 5, 7, 9, 11) if not pentatonic else (0, 2, 4, 7, 9),
-        'min': (0, 2, 3, 5, 7, 8, 10, 11) if not pentatonic else (0, 3, 5, 7, 10),
+        'min': (0, 2, 3, 5, 7, 8, 10) if not pentatonic else (0, 3, 5, 7, 10),
         'chromatic': range(12)
     }
 

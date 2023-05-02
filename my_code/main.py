@@ -29,7 +29,7 @@ def main(mode, key, tempo, len_each, total):
     logging.basicConfig(level=logging.DEBUG, filename=f_path+'.log', filemode='w', format='%(message)s')
 
     # 60 bpm single track Midi
-    midi = Midi(number_tracks=1, tempo=tempo, instrument=0, channel=0)  # Acoustic Grand Piano
+    midi = Midi(number_tracks=1, tempo=tempo, instrument=2, channel=0)  # Electric Grand Piano
 
     full_seq = _MODE_FUNC[mode](key, len_each, total)
 

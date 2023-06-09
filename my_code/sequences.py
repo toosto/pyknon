@@ -1,11 +1,12 @@
 import math
 import random
 import logging
+import re
 
 from pyknon.music import Note, NoteSeq
 from pychord import utils
 
-import helpers, constants
+import helpers, constants, range_map
 
 
 def get_absolute_seq(key, len_note, total):
@@ -62,17 +63,17 @@ def get_relative_seq(key, len_note, total):
 
 def get_relative_p_seq(key, len_note, total):
 
-    all_notes = helpers.get_all_notes(key, pentatonic=True)
-    logging.debug('all the notes in the key are %s.', all_notes)
-    seq_notes = random.choices(all_notes, k=total)
-
     duration = int(4/len_note)
+
+    all_notes = helpers.get_all_notes(key, pentatonic=True)
     dev_5 = 5 - random.choice((4, 5))
-    octave = "'" * (abs(dev_5) + 1) if dev_5 <= 0 else "," * dev_5
+
+    octave_tones = _get_octave_tones(dev_5, all_notes)
+    all_notes = [Note(f'{tone[0]}{duration}{tone[1]}') for tone in octave_tones]
 
     note_seq = NoteSeq()
-    for note in seq_notes:
-        note_seq.append(Note(f'{note}{duration}{octave}'))
+    for note in random.choices(all_notes, k=total):
+        note_seq.append(note)
 
     return note_seq
 
@@ -163,3 +164,27 @@ def get_harmonised_seq(key, len_chord, *args):
 
     return Note_Seq
 
+
+def _get_octave_tones(dev_5, all_notes):
+
+    if dev_5 > 0:
+        octave = dev_5 * ","
+        ascend = True
+    else:
+        octave = (abs(dev_5) + 1) * "'"
+        ascend = False
+
+    tones = [(_, octave) for _ in all_notes]
+
+    tone_indices = tuple(range_map.RANGE_MAP["".join(_)] for _ in tones)
+
+    if ascend:
+        ext_tone_index = min(tone_indices) + 12
+    else:
+        ext_tone_index = max(tone_indices) - 12
+
+    for key, value in range_map.RANGE_MAP.items():
+        if value == ext_tone_index:
+            tones.append(re.match(r"([A-Zb#]+)('+|,+)", key).groups())
+
+    return tones

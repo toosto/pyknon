@@ -4,6 +4,7 @@ sys.path.append('/home/parallels/repos/pyknon')
 
 import logging
 import re
+import time
 
 from pyknon.genmidi import Midi
 
@@ -22,10 +23,11 @@ _MODE_FUNC = {
 
 def main(mode, key, tempo, len_each, total):
 
-    f_path = f"/home/parallels/shared_folder/midi_tracks/Track_{mode}_{key}_{tempo}_{len_each}_{total}"
+    random_str = str(time.time()).split('.')[1]
+
+    f_path = f"/home/parallels/shared_folder/midi_tracks/Track_{mode}_{key}_{tempo}_{len_each}_{total}_{random_str}"
 
     # Initialize logging.
-    # logging.basicConfig(level=logging.INFO, filename=f_path+'.log')
     logging.basicConfig(level=logging.DEBUG, filename=f_path+'.log', filemode='w', format='%(message)s')
 
     # 60 bpm single track Midi

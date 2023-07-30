@@ -25,7 +25,7 @@ def get_all_notes(key, pentatonic=False, chromatic=False):
     return all_notes
 
 
-def get_all_chords(key):
+def get_all_chords(key, dim=False):
 
     tonic, type_key = get_tonic_type(key)
     logging.debug('Tonic: %s, type of key: %s', tonic, type_key)
@@ -35,6 +35,11 @@ def get_all_chords(key):
         'min': ('min', 'dim', 'maj', 'min', 'min', 'maj', 'maj', 'min')
     }
 
-    chords = tuple(Chord.from_note_index(note=_+1, quality=qualities[type_key][_], scale=key) for _ in range(0, 7))
+    chords = []
+    for index in range(7):
+        quality = qualities[type_key][index]
+        if quality == 'dim' and dim == False:
+            continue
+        chords.append(Chord.from_note_index(note=index+1, quality=quality, scale=key))
 
     return chords

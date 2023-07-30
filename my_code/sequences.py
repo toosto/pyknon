@@ -102,7 +102,7 @@ def get_chords_seq(key, len_chord, total):
     chords = helpers.get_all_chords(key)
     logging.debug('All the chords in the key are %s.', chords)
     seq_chords = random.choices(chords, k=total)
-    higher_octave = random.choice((True, False))
+    higher_octave = True
 
     duration = int(4/len_chord)
 
@@ -142,7 +142,7 @@ def get_octave_seq(key, len_note, *args):
 
 def get_harmonised_seq(key, len_chord, *args):
 
-    chords = list(helpers.get_all_chords(key))
+    chords = list(helpers.get_all_chords(key, dim=True))
     chords.append(chords[0])  # Completing the octave
     logging.debug('All the chords in the key are %s.', chords)
 

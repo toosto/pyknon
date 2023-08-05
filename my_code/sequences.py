@@ -133,7 +133,7 @@ def get_octave_seq(key, len_note, *args):
             dev_5 -= 1
         octave = "'" * (abs(dev_5) + 1) if dev_5 <= 0 else "," * dev_5
         note_str = f'{note}{duration}{octave}'
-        logging.info('Constructing Note with %s.', note_str)
+        logging.debug('Constructing Note with %s.', note_str)
         note_seq.append(Note(note_str))
         prev_value = note_val
 
@@ -157,7 +157,7 @@ def get_harmonised_seq(key, len_chord, *args):
             dev_5 -= 1
         octave = "'" * (abs(dev_5) + 1) if dev_5 <= 0 else "," * dev_5
         chord_str = ' '.join([f'{chord.root}{duration}{octave}', *chord.components()[1:]])
-        logging.info('Constructing Chord with %s.', chord_str)
+        logging.debug('Constructing Chord with %s.', chord_str)
         note_seq = NoteSeq(chord_str)
         Note_Seq.append(note_seq)
         prev_value = root_val

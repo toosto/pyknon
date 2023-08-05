@@ -37,7 +37,7 @@ def main(mode, key, tempo, len_each, total):
 
     len_ = len(full_seq)
     for index, item in enumerate(full_seq):
-        logging.debug(f'{index+1}: {item}')
+        logging.info(item)
 
     if mode in ('chords', 'harmonised'):
         midi.seq_chords(full_seq, track=0)

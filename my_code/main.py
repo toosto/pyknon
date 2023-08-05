@@ -31,13 +31,13 @@ def main(mode, key, tempo, len_each, total):
     logging.basicConfig(level=logging.DEBUG, filename=f_path+'.log', filemode='w', format='%(message)s')
 
     # 60 bpm single track Midi
-    midi = Midi(number_tracks=1, tempo=tempo, instrument=2, channel=0)  # Electric Grand Piano
+    midi = Midi(number_tracks=1, tempo=tempo, instrument=48, channel=0)  # String ensemble 1
 
     full_seq = _MODE_FUNC[mode](key, len_each, total)
 
     len_ = len(full_seq)
     for index, item in enumerate(full_seq):
-        logging.debug(f'{(100/len_) * (index + 1)}: {item}')
+        logging.debug(f'{index+1}: {item}')
 
     if mode in ('chords', 'harmonised'):
         midi.seq_chords(full_seq, track=0)

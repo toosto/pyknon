@@ -11,14 +11,14 @@ from pyknon.genmidi import Midi
 import sequences
 
 _MODE_FUNC = {
-    'absolute': sequences.get_absolute_seq,
-    'absolute_p': sequences.get_absolute_p_seq,
-    'relative': sequences.get_relative_seq,
-    'relative_p': sequences.get_relative_p_seq,
-    'interval': sequences.get_interval_seq,
-    'chords': sequences.get_chords_seq,
-    'octave': sequences.get_octave_seq,  # Debugging
-    'harmonised': sequences.get_harmonised_seq  # Debugging
+    'absolute': (sequences.get_absolute_seq, 2),
+    'absolute_p': (sequences.get_absolute_p_seq, 2),
+    'relative': (sequences.get_relative_seq, 2),
+    'relative_p': (sequences.get_relative_p_seq, 2),
+    'interval': (sequences.get_interval_seq, 2),
+    'chords': (sequences.get_chords_seq, 48),
+    'octave': (sequences.get_octave_seq, 2),  # Debugging
+    'harmonised': (sequences.get_harmonised_seq, 48)  # Debugging
 }
 
 def main(mode, key, tempo, len_each, total):
@@ -30,10 +30,11 @@ def main(mode, key, tempo, len_each, total):
     # Initialize logging.
     logging.basicConfig(level=logging.DEBUG, filename=f_path+'.log', filemode='w', format='%(message)s')
 
+    func, instrument = _MODE_FUNC[mode]
     # 60 bpm single track Midi
-    midi = Midi(number_tracks=1, tempo=tempo, instrument=48, channel=0)  # String ensemble 1
+    midi = Midi(number_tracks=1, tempo=tempo, instrument=instrument, channel=0)  # String ensemble 1
 
-    full_seq = _MODE_FUNC[mode](key, len_each, total)
+    full_seq = func(key, len_each, total)
 
     len_ = len(full_seq)
     for index, item in enumerate(full_seq):

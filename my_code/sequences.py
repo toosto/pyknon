@@ -66,7 +66,8 @@ def get_relative_p_seq(key, len_note, total):
     duration = int(4/len_note)
 
     all_notes = helpers.get_all_notes(key, pentatonic=True)
-    dev_5 = 5 - random.choice((4, 5))
+    # dev_5 = 5 - random.choice((4, 5))
+    dev_5 = 1  # Lowest octave
 
     octave_tones = _get_octave_tones(dev_5, all_notes)
     all_notes = [Note(f'{tone[0]}{duration}{tone[1]}') for tone in octave_tones]

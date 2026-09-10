@@ -11,14 +11,14 @@ from pyknon.genmidi import Midi
 import sequences
 
 _MODE_FUNC = {
-    'absolute': (sequences.get_absolute_seq, 2),
-    'absolute_p': (sequences.get_absolute_p_seq, 2),
-    'relative': (sequences.get_relative_seq, 2),
-    'relative_p': (sequences.get_relative_p_seq, 2),
-    'interval': (sequences.get_interval_seq, 2),
-    'chords': (sequences.get_chords_seq, 48),
-    'octave': (sequences.get_octave_seq, 2),  # Debugging
-    'harmonised': (sequences.get_harmonised_seq, 48)  # Debugging
+    'absolute': (sequences.get_absolute_seq, 0),
+    'absolute_p': (sequences.get_absolute_p_seq, 0),
+    'relative': (sequences.get_relative_seq, 0),
+    'relative_p': (sequences.get_relative_p_seq, 0),
+    'interval': (sequences.get_interval_seq, 0),
+    'chords': (sequences.get_chords_seq, 0),
+    'octave': (sequences.get_octave_seq, 0),  # Debugging
+    'harmonised': (sequences.get_harmonised_seq, 0)  # Debugging
 }
 
 def main(mode, key, tempo, len_each, total):
